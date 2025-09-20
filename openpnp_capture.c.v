@@ -1,5 +1,5 @@
 @[translated]
-module openpnp_capture
+module webcam_desktop
 
 //
 //
