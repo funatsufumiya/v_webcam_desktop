@@ -4,6 +4,11 @@ module webcam_desktop
 
 #include "openpnp-capture.h"
 
+$if windows && x64 {
+#flag -L @VMODROOT/libs/windows_x86_64
+#flag -lopenpnp-capture
+}
+
 $if linux && x64 {
 #flag -L @VMODROOT/libs/ubuntu_x86_64
 #flag -lopenpnp-capture
