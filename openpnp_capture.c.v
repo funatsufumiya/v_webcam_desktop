@@ -104,9 +104,9 @@ pub fn cap_get_device_count(ctx CapContext) u32 {
 //    @param index The device index of the capture device.
 //    @return a pointer to an UTF-8 string containting the name of the capture device.
 //
-fn C.Cap_getDeviceName(ctx CapContext, index CapDeviceID) &i8
+fn C.Cap_getDeviceName(ctx CapContext, index CapDeviceID) &char
 
-pub fn cap_get_device_name(ctx CapContext, index CapDeviceID) &i8 {
+pub fn cap_get_device_name(ctx CapContext, index CapDeviceID) &char {
 	return C.Cap_getDeviceName(ctx, index)
 }
 
@@ -130,9 +130,9 @@ pub fn cap_get_device_name(ctx CapContext, index CapDeviceID) &i8 {
 //    @param index The device index of the capture device.
 //    @return a pointer to an UTF-8 string containting the unique ID of the capture device.
 //
-fn C.Cap_getDeviceUniqueID(ctx CapContext, index CapDeviceID) &i8
+fn C.Cap_getDeviceUniqueID(ctx CapContext, index CapDeviceID) &char
 
-pub fn cap_get_device_unique_id(ctx CapContext, index CapDeviceID) &i8 {
+pub fn cap_get_device_unique_id(ctx CapContext, index CapDeviceID) &char {
 	return C.Cap_getDeviceUniqueID(ctx, index)
 }
 
@@ -322,7 +322,7 @@ pub fn cap_set_log_level(level u32) {
 	C.Cap_setLogLevel(level)
 }
 
-type CapCustomLogFunc = fn (u32, &i8)
+type CapCustomLogFunc = fn (u32, &char)
 //*install a custom callback for a logging function.
 //
 //    the callback function must have the following 
@@ -351,9 +351,9 @@ pub fn cap_install_custom_log_function(log_func CapCustomLogFunc) {
 //    __BUILDTYPE__
 //    
 //
-fn C.Cap_getLibraryVersion() &i8
+fn C.Cap_getLibraryVersion() &char
 
-pub fn cap_get_library_version() &i8 {
+pub fn cap_get_library_version() &char {
 	return C.Cap_getLibraryVersion()
 }
 
