@@ -31,6 +31,13 @@ module webcam_desktop
 //
 // 
 //
+
+pub const capresult_ok  = u32(0)
+pub const capresult_err = u32(1)
+pub const capresult_devicenotfound = u32(2)
+pub const capresult_formatnotsupported = u32(3)
+pub const capresult_propertynotsupported = u32(4)
+
 // make sure its exported/imported as pure C 
 // even if we're compiling with a C++ compiler
 pub type CapContext = voidptr
@@ -46,6 +53,8 @@ pub type CapFormatID = u32
 // supported properties:
 pub type CapPropertyID = u32
 ///< property ID (exposure, zoom, focus etc.)
+
+@[typedef]
 pub struct C.CapFormatInfo { 
 pub mut:
 	width u32
@@ -59,6 +68,7 @@ pub mut:
 	bpp u32
 ///< bits per pixel
 }
+
 //*****************************************
 //     CONTEXT CREATION AND DEVICE ENUMERATION
 //*****************************************/
@@ -156,10 +166,10 @@ pub fn cap_get_num_formats(ctx CapContext, index CapDeviceID) int {
 //    @param info pointer to a C.CapFormatInfo structure to be filled with data.
 //    @return The CapResult.
 //
-fn C.Cap_getFormatInfo(ctx CapContext, index CapDeviceID, id CapFormatID, info &C.CapFormatInfo) CapResult
+fn C.Cap_getFormatInfo(ctx CapContext, index CapDeviceID, id CapFormatID, mut info C.CapFormatInfo) CapResult
 
-pub fn cap_get_format_info(ctx CapContext, index CapDeviceID, id CapFormatID, info &C.CapFormatInfo) CapResult {
-	return C.Cap_getFormatInfo(ctx, index, id, info)
+pub fn cap_get_format_info(ctx CapContext, index CapDeviceID, id CapFormatID, mut info C.CapFormatInfo) CapResult {
+	return C.Cap_getFormatInfo(ctx, index, id, mut info)
 }
 
 //*****************************************
@@ -200,8 +210,8 @@ pub fn cap_close_stream(ctx CapContext, stream CapStream) CapResult {
 //
 fn C.Cap_isOpenStream(ctx CapContext, stream CapStream) u32
 
-pub fn cap_is_open_stream(ctx CapContext, stream CapStream) u32 {
-	return C.Cap_isOpenStream(ctx, stream)
+pub fn cap_is_open_stream(ctx CapContext, stream CapStream) bool {
+	return C.Cap_isOpenStream(ctx, stream) == 1
 }
 
 //*****************************************
