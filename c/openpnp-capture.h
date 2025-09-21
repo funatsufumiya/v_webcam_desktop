@@ -49,6 +49,9 @@
         #define SO_IMPORT
         #define SO_EXPORT
     #endif
+#elif defined(__TINYC__)
+    #define SO_IMPORT
+    #define SO_EXPORT
 #else
     #error("Unknown compiler")
 #endif
