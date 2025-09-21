@@ -1,5 +1,7 @@
 # v_webcam_desktop
 
+WIP
+
 Webcam desktop for V-lang (using [openpnp-capture](https://github.com/openpnp/openpnp-capture))
 
 ## Install
