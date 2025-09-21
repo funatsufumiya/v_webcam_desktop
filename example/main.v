@@ -5,6 +5,9 @@ fn main(){
 
 	mut ctx := webcam_desktop.create_context()
 	devices := webcam_desktop.list_devices(ctx)
+	if devices.len == 0 {
+		println('No device')
+	}
 	for device in devices {
 		println('${device.id}: Name: ${device.name}, Unique ID: ${device.unique_id}')
 	}
