@@ -59,8 +59,13 @@ fn init(mut app App) {
 		return
 	}
 
+	for device in devices {
+		println('${device.id}: Name: ${device.name}, Unique ID: ${device.unique_id}')
+	}
+
 	// Use first device
-	device := devices[0]
+	device_id := 0
+	device := devices[device_id]
 	println('Using device: ${device.name} (ID: ${device.id})')
 
 	// Get format info (use format 0)
@@ -70,15 +75,15 @@ fn init(mut app App) {
 		return
 	}
 
-	finfo := webcam_desktop.get_format_info(app.ctx, u32(device.id), 0) or { panic(err) }
+	finfo := webcam_desktop.get_format_info(app.ctx, u32(device.id), device_id) or { panic(err) }
 	app.width = int(finfo.width)
 	app.height = int(finfo.height)
 	println('Format: ${app.width}x${app.height} @ ${finfo.fps} FPS')
 
 	// Open stream
-	app.stream = webcam_desktop.open_stream(app.ctx, u32(device.id), 0) or { panic(err) }
+	app.stream = webcam_desktop.open_stream(app.ctx, u32(device.id), device_id) or { panic(err) }
 
-    app.image = app.gg.new_streaming_image(app.width, app.height, 3, gg.StreamingImageConfig{
+    app.image = app.gg.new_streaming_image(app.width, app.height, 4, gg.StreamingImageConfig{
         pixel_format: .rgba8
     })
 }
@@ -112,6 +117,7 @@ fn (mut app App) update_frame() {
         }
 		// app.gg.update_pixel_data(app.image, app.buffer.data)
 		app.gg.update_pixel_data(app.image, rgba_buffer.data)
+		// println("new frame")
 	}
 	app.gg.draw_image_by_id(0, 0, app.width, app.height, app.image)
 }
