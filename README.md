@@ -17,6 +17,7 @@ $ LD_LIBRARY_PATH=~/.vmodules/webcam_desktop/libs/ubuntu_x86_64 v run ~/.vmodule
 ```
 
 ### mac
+
 ```bash
 $ DYLD_LIBRARY_PATH=~/.vmodules/webcam_desktop/libs/macos_arm64 v run ~/.vmodules/webcam_desktop/example/main.v
 ```
