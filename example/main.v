@@ -110,7 +110,8 @@ fn (mut app App) update_frame() {
             rgba_buffer[i * 4 + 2] = app.buffer[i * 3 + 2] // B
             rgba_buffer[i * 4 + 3] = 255  // Alpha
         }
-		app.gg.update_pixel_data(app.image, app.buffer.data)
+		// app.gg.update_pixel_data(app.image, app.buffer.data)
+		app.gg.update_pixel_data(app.image, rgba_buffer)
 	}
 	app.gg.draw_image_by_id(0, 0, app.width, app.height, app.image)
 }
