@@ -5,14 +5,18 @@ Webcam desktop for V-lang (using [openpnp-capture](https://github.com/openpnp/op
 ## Install
 
 ```bash
-$ git clone https://github.com/funatsufumiya/v_webcam_desktop ~/.vmodules/webcam_desktop
+$ git clone --recursive https://github.com/funatsufumiya/v_webcam_desktop ~/.vmodules/webcam_desktop
 ```
 
 ## Example (using gg)
 
-```bash
-$ v run ~/.vmodules/webcam_desktop/example/main.v
+### linux
 
-# if mac
+```bash
+$ LD_LIBRARY_PATH=~/.vmodules/webcam_desktop/libs/ubuntu_x86_64 v run ~/.vmodules/webcam_desktop/example/main.v
+```
+
+### mac
+```bash
 $ DYLD_LIBRARY_PATH=~/.vmodules/webcam_desktop/libs/macos_arm64 v run ~/.vmodules/webcam_desktop/example/main.v
 ```
